@@ -1,3 +1,5 @@
+# Corporate Finance Module
+
 import math
 import commons
 import numpy as np
@@ -132,4 +134,30 @@ term""",
             print "\nPMT = {}".format(value)
         else:
             print "\nPMT = {}".format(value)
+            return value
+
+    def passthrough_fv(self, mode):
+
+        # numpy function called
+
+        value = np.fv(self.data_model.rate,
+        self.data_model.nper, self.data_model.pmt, self.data_model.when)
+
+        if mode == 'full':
+            commons.render_to_main(
+                [
+                    """FUTURE VALUE""",
+                    """The Future Value of Money asuming
+a rate of interest and regular payments""",
+                    {
+                        'Princple':-self.data_model.pmt,
+                        'Interest_Rate':self.data_model.rate,
+                        'Loan Term':self.data_model.nper,
+                        'Passthrough Function':'numpy.fv',
+                    }
+                ]
+            )
+            print "\nFV = {}".format(value)
+        else:
+            print "\nFV = {}".format(value)
             return value

@@ -21,8 +21,10 @@ class module:
         print '=============================='
 
         if self.module_name == 'cf':
-            self.cf = cf.corporate_finance_module(self.model_name, self.data_model)
-            print 'MSG: Accesing corporate_finace_module with model {}'.format(self.model_name)
+            self.cf = cf.corporate_finance_module(
+            self.model_name, self.data_model)
+            print 'MSG: Accesing corporate_finace_module with model {}'.format(
+            self.model_name)
 
     def read_data_source(self, data_src):
         if data_src == 'd':
@@ -42,17 +44,21 @@ class module:
             return [s, True]
 
 #REGISTER MODELS HERE
-#Make this more abstract
+#MAKE THIS MORE ABSTRACT
 
     def get_data_model(self, data):
-        data = commons.convert_to_float(data)
         if self.model_name == 'npv':
             data_model = models.net_present_value_model(data)
         if self.model_name == 'npva':
             data_model = models.net_present_value_annuity_model(data)
         if self.model_name == 'pmt':
-            data_model = models.fiat_payment_schedule(data)
+            data_model = models.fiat_payment_schedule_model(data)
+        if self.model_name == 'fv':
+            data_model = models.future_value_model(data)
         return data_model
+
+#REGISTER MODULES HERE
+#MAKE THIS MORE ABSTRACT
 
     def update_data(self, data_src):
         model_name = str(raw_input('Enter model name : '))
@@ -61,6 +67,7 @@ class module:
         if self.module_name == 'cf':
             if self.read_data_status[1] == True:
                 self.data_model = self.get_data_model(self.read_data_status[0])
-                self.cf = cf.corporate_finance_module(self.model_name, self.data_model)
+                self.cf = cf.corporate_finance_module(
+                self.model_name, self.data_model)
             else:
                 return null
