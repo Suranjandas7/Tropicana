@@ -31,7 +31,7 @@ class corporate_finance_module:
             return list_pv
 
         if mode == "full":
-            commons.render_to_main(
+            value_dict = commons.render_to_main(
                 [
                     'NET PRESENT VALUE',
                     """Value of future Cash
@@ -65,6 +65,9 @@ cost of asset adjusted.""",
 
             """.format(npv)
 
+            value_dict['NPV'] = npv
+            return [value, value_dict]
+
         else:
 
             x = 0
@@ -91,7 +94,7 @@ cost of asset adjusted.""",
         value = self.data_model.periodic_payment * part_d
 
         if mode == 'full':
-            commons.render_to_main(
+            value_dict = commons.render_to_main(
                 [
                     """NET PRESENT VALUE
 OF AN ANNUITY""",
@@ -105,6 +108,8 @@ annuity payment.""",
                 ]
             )
             print "NPV_A = {}".format(value)
+            value_dict['NPV_A'] = value
+            return [value, value_dict]
         else:
             print "NPV_A = {}".format(value)
             return value
@@ -117,7 +122,7 @@ annuity payment.""",
         self.data_model.loan_term, -self.data_model.principle)
 
         if mode == 'full':
-            commons.render_to_main(
+            value_dict = commons.render_to_main(
                 [
                     """FIAT PAYMENT SCHEDULE""",
                     """An annual payment that pays off
@@ -132,6 +137,8 @@ term""",
                 ]
             )
             print "\nPMT = {}".format(value)
+            value_dict['PMT'] = value
+            return [value, value_dict]
         else:
             print "\nPMT = {}".format(value)
             return value
@@ -144,7 +151,7 @@ term""",
         self.data_model.nper, self.data_model.pmt, self.data_model.when)
 
         if mode == 'full':
-            commons.render_to_main(
+            value_dict = commons.render_to_main(
                 [
                     """FUTURE VALUE""",
                     """The Future Value of Money asuming
@@ -158,6 +165,35 @@ a rate of interest and regular payments""",
                 ]
             )
             print "\nFV = {}".format(value)
+            value_dict['FV'] = value
+            return [value, value_dict]
         else:
-            print "\nFV = {}".format(value)
+            return value
+
+    def gordon_equity_cost(self, mode):
+
+        value = (
+        self.data_model.current_dividend * ((
+        1 + self.data_model.growth_rate)/self.data_model.current_share_price
+        )) + self.data_model.growth_rate
+
+        if mode == 'full':
+            value_dict = commons.render_to_main(
+                [
+                    """Gordon Equity Cost Model""",
+                    """The value of a share is the present value
+of the future anticipated dividend stream from the share, where
+the future anticipated dividends are discounted at the appropriate
+risk-adjusted cost of equity.""",
+                    {
+                        'Current Share Price':self.data_model.current_share_price,
+                        'Current Dividend':self.data_model.current_dividend,
+                        'Anticipated Growth Rate':self.data_model.growth_rate,
+                    }
+                ]
+            )
+            print "\nCost of Equity (decimal percent) = {}".format(value)
+            value_dict['Cost of Equity (decimal percent)'] = value
+            return [value, value_dict]
+        else:
             return value

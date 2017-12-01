@@ -17,6 +17,8 @@ def render_to_main(data):
         print """
             {} : {}""".format(d, dictionary[d])
 
+    return dictionary
+
 # def convert_to_float(data):
 #     for d in data:
 #         try:

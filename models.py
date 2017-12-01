@@ -32,3 +32,10 @@ class future_value_model:
         self.nper = float(data[1][1])
         self.pmt = float(data[2][1])
         self.when = float(data[3][1])
+
+class gordon_model_cost_equity_model:
+    def __init__(self, data):
+        self. name = "Gordon_Model_Cost_Equity_Model"
+        self.current_share_price = float(data[0][1])
+        self.current_dividend = float(data[1][1])
+        self.growth_rate = float(data[2][1])
