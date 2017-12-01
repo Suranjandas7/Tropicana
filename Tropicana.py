@@ -9,6 +9,9 @@ class module:
         self.module_name = module_name
         self.model_name = model_name
         self.data_src = data_src
+        print """
+            TROPICANA FINANCIAL CALCULATOR
+        """
 
         self.read_data_status = self.update_data(self.data_src, self.model_name)
 
@@ -22,7 +25,8 @@ class module:
                 if self.module_name == 'cf':
                     self.cf = cf.corporate_finance_module(
                     self.model_name, self.data_model)
-                    print 'MSG: Accesing corporate_finace_module with model {}'.format(
+                    print """MSG: Accesing corporate_finace_module with model {}
+with this object""".format(
                     self.model_name)
         except TypeError:
             print 'MSG : Something went wrong.'
@@ -61,7 +65,7 @@ class module:
                 data_model = models.gordon_model_cost_equity_model(data)
             return data_model
         except UnboundLocalError:
-            print 'MSG : {} Model not found.'.format(self.model_name)
+            print 'MSG : {} model not found.'.format(self.model_name)
             return False
 
 #REGISTER MODULES HERE
