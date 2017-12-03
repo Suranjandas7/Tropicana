@@ -77,3 +77,11 @@ class CAPM_classic_model:
         self.beta = float(data[0][1])
         self.rf_rate = float(data[1][1])
         self.expected = float(data[2][1])
+
+class CAPM_taxadj_model:
+    def __init__(self, data):
+        self.name = "CAPM_Taxadj_Model"
+        self.beta = float(data[0][1])
+        self.rf_rate = float(data[1][1])
+        self.expected = float(data[2][1])
+        self.tax_rate = float(data[3][1])

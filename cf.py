@@ -263,6 +263,34 @@ for two sets of measurements.""",
                 ]
             )
             value_dict['Cost'] = value
+            print "\nCost of Equity (decimal percent) = {}".format(value)
+            return [value, value_dict]
+        else:
+            return value
+
+    def CAPM_taxadj(self, mode):
+        ta_rate = self.data_model.rf_rate * (1 - self.data_model.tax_rate)
+        value = ta_rate + (
+        self.data_model.beta * (
+        self.data_model.expected - ta_rate
+        ))
+
+        if mode == 'full':
+            value_dict = commons.render_to_main(
+                [
+                    """CAPM Tax Adjusted""",
+                    """CAPM model that includes taxes
+in its calculation.""",
+                    {
+                        'beta':self.data_model.beta,
+                        'risk free rate':self.data_model.rf_rate,
+                        'expected market rate':self.data_model.expected,
+                        'tax rate':self.data_model.tax_rate,
+                    }
+                ]
+            )
+            value_dict['Cost'] = value
+            print "\nCost of Equity (decimal percent) = {}".format(value)
             return [value, value_dict]
         else:
             return value

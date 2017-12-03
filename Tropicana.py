@@ -71,6 +71,8 @@ with this object""".format(
                 data_model = models.regression_line_model(data)
             if self.model_name == 'CAPM_classic':
                 data_model = models.CAPM_classic_model(data)
+            if self.model_name == 'CAPM_taxadj':
+                data_model = models.CAPM_taxadj_model(data)
             return data_model
         except UnboundLocalError:
             print 'MSG : {} model not found.'.format(self.model_name)
