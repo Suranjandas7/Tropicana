@@ -3,6 +3,7 @@
 import math
 import commons
 import numpy as np
+from scipy import stats
 
 class corporate_finance_module:
 
@@ -194,6 +195,74 @@ risk-adjusted cost of equity.""",
             )
             print "\nCost of Equity (decimal percent) = {}".format(value)
             value_dict['Cost of Equity (decimal percent)'] = value
+            return [value, value_dict]
+        else:
+            return value
+
+    # def two_stage_gordon(self, mode):
+    #
+    #     high = 4
+    #     low = 0
+    #     while (high - low) > 0.0000001:
+    #         estimate = (high + low) / 2
+    #         factor = (1 + self.data_model.high_growth) / (1 + estimate)
+    #         Term1 = self.data_model.Divo * factor * ((math.pow((1-factor), self.data_model.h_years)) / (1-factor))
+    #         Term2 = self.data_model.Divo * math.pow(factor, self.data_model.h_years) * (
+    #         (1 + self.data_model.n_growth) / (estimate - self.data_model.n_growth))
+    #         if (Term1 + Term2) > self.data_model.Po:
+    #             low = (high + low)/2
+    #         else:
+    #             high = (high + low)/2
+    #     return estimate
+
+    def passthrough_reg_line(self, mode):
+        series_A = self.data_model.series_A
+        series_B = self.data_model.series_B
+
+        slope, intercept, r_value, p_value, stderr = stats.linregress(
+        series_A, series_B
+        )
+
+        if mode == 'full':
+            value_dict = commons.render_to_main(
+                [
+                    """Regression Line""",
+                    """Creates a least-squares regression line
+for two sets of measurements.""",
+                    {
+                        'slope':slope,
+                        'intercept':intercept,
+                        'r-value':r_value,
+                        'p-value':p_value,
+                        'std_err':stderr,
+                        'Passthrough Function':'scipy.stats.linregress'
+                    }
+                ]
+            )
+            return [slope, value_dict]
+        else:
+            return slope
+
+    def CAPM_classic(self, mode):
+
+        value = self.data_model.rf_rate + (
+        self.data_model.beta * (
+        self.data_model.expected - self.data_model.rf_rate
+        ))
+
+        if mode == 'full':
+            value_dict = commons.render_to_main(
+                [
+                    """CAPM Classic""",
+                    """Classic CAPM model that ignores taxes.""",
+                    {
+                        'beta':self.data_model.beta,
+                        'risk free rate':self.data_model.rf_rate,
+                        'expected market rate':self.data_model.expected,
+                    }
+                ]
+            )
+            value_dict['Cost'] = value
             return [value, value_dict]
         else:
             return value

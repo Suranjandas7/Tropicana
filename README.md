@@ -16,3 +16,8 @@ Once the model object is initialized, you can access the results by
 if view_option is 'full', the display would be nicer. Put any other string to just get the result as a value. For example ->
 
 > value = mod.module_name.model_name('')
+
+## Dependencies
+
+1. numpy
+2. scipy

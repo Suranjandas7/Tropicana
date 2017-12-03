@@ -1,5 +1,6 @@
 # Common methods
 
+
 def render_to_main(data):
     title = data[0]
     desc = data[1]

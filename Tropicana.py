@@ -4,6 +4,8 @@ import csv
 from StringIO import StringIO
 import commons
 
+# Gray models are a thing now!
+
 class module:
     def __init__(self, module_name, model_name, data_src):
         self.module_name = module_name
@@ -63,6 +65,12 @@ with this object""".format(
                 data_model = models.future_value_model(data)
             if self.model_name == 'gordon_equity_cost':
                 data_model = models.gordon_model_cost_equity_model(data)
+            # if self.model_name == 'two_stage_gordon':
+            #     data_model = models.TwoStageGordon_model(data)
+            if self.model_name == 'reg_cof':
+                data_model = models.regression_line_model(data)
+            if self.model_name == 'CAPM_classic':
+                data_model = models.CAPM_classic_model(data)
             return data_model
         except UnboundLocalError:
             print 'MSG : {} model not found.'.format(self.model_name)

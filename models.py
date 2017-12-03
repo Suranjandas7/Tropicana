@@ -44,3 +44,36 @@ class gordon_model_cost_equity_model:
         self.current_share_price = float(data[0][1])
         self.current_dividend = float(data[1][1])
         self.growth_rate = float(data[2][1])
+
+# class TwoStageGordon_model:
+#     def __init__(self, data):
+#         self.module = 'Corporate_Finance'
+#         self.name = "TwoStageGordon_model"
+#         self.Po = float(data[0][1])
+#         self.Divo = float(data[1][1])
+#         self.high_growth = float(data[2][1])
+#         self.h_years = float(data[3][1])
+#         self.n_growth = float(data[4][1])
+
+class regression_line_model:
+    def __init__(self, data):
+        self.name = "Regression_Cof_Model"
+        self.series_A = []
+        self.series_B = []
+        try:
+            for d in data[0]:
+                self.series_A.append(float(d))
+        except IndexError:
+            pass
+        try:
+            for d in data[1]:
+                self.series_B.append(float(d))
+        except IndexError:
+            pass
+
+class CAPM_classic_model:
+    def __init__(self, data):
+        self.name = "CAPM_Classic_Model"
+        self.beta = float(data[0][1])
+        self.rf_rate = float(data[1][1])
+        self.expected = float(data[2][1])

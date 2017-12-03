@@ -8,3 +8,4 @@ Methods ->
     3. passthrough_pmt
     4. passthrough_fv
     5. gordon_equity_cost
+    6. two_stage_gordon
