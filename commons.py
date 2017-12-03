@@ -1,5 +1,5 @@
 # Common methods
-
+import numpy as np
 
 def render_to_main(data):
     title = data[0]
@@ -20,16 +20,11 @@ def render_to_main(data):
 
     return dictionary
 
-# def convert_to_float(data):
-#     for d in data:
-#         try:
-#             d = float(d[0])
-#         except TypeError:
-#             d = d[0]
-#             print d
-#             pass
-#
-#         print type(d)
-#
-#     print 'MSG : DATA CONVERTED'
-#     return data
+def average_returns(*arg):
+    periodic_returns = []
+    for x in xrange(1, len(arg[0])):
+        monthly_returns.append(
+        100*((arg[0][x] - arg[0][x-1])/arg[0][x-1]))
+    average_m = np.average(monthly_returns)
+
+    return average_m*arg[1]

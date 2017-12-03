@@ -193,27 +193,11 @@ risk-adjusted cost of equity.""",
                     }
                 ]
             )
-            print "\nCost of Equity (decimal percent) = {}".format(value)
-            value_dict['Cost of Equity (decimal percent)'] = value
+            print "\nCost of Equity  = {}".format(value)
+            value_dict['Cost of Equity '] = value
             return [value, value_dict]
         else:
             return value
-
-    # def two_stage_gordon(self, mode):
-    #
-    #     high = 4
-    #     low = 0
-    #     while (high - low) > 0.0000001:
-    #         estimate = (high + low) / 2
-    #         factor = (1 + self.data_model.high_growth) / (1 + estimate)
-    #         Term1 = self.data_model.Divo * factor * ((math.pow((1-factor), self.data_model.h_years)) / (1-factor))
-    #         Term2 = self.data_model.Divo * math.pow(factor, self.data_model.h_years) * (
-    #         (1 + self.data_model.n_growth) / (estimate - self.data_model.n_growth))
-    #         if (Term1 + Term2) > self.data_model.Po:
-    #             low = (high + low)/2
-    #         else:
-    #             high = (high + low)/2
-    #     return estimate
 
     def passthrough_reg_line(self, mode):
         series_A = self.data_model.series_A
@@ -262,8 +246,8 @@ for two sets of measurements.""",
                     }
                 ]
             )
-            value_dict['Cost'] = value
-            print "\nCost of Equity (decimal percent) = {}".format(value)
+            value_dict['Expected Return'] = value
+            print "\nExpected Return = {}".format(value)
             return [value, value_dict]
         else:
             return value
@@ -289,8 +273,7 @@ in its calculation.""",
                     }
                 ]
             )
-            value_dict['Cost'] = value
-            print "\nCost of Equity (decimal percent) = {}".format(value)
+            value_dict['Expected Return'] = value
             return [value, value_dict]
         else:
             return value

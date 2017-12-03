@@ -43,7 +43,7 @@ with this object""".format(
                     s.append(row)
             return [s, True]
         else:
-            f = StringIO(self.data_src)
+            f = StringIO(data_src)
             reader = csv.reader(f, delimiter=',')
             s = []
             for row in reader:
